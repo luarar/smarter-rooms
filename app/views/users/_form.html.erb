@@ -1,0 +1,47 @@
+<div class="container form-container">
+<div class="col-md-7">
+<div class="card form-card">
+
+
+<%= form_with(model: user, local: true) do |form| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :birthdate %>
+    <%= form.date_select :birthdate, :start_year => Date.current.year, :end_year => 1920, class: 'form-control space-bottom' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+
+  <div class="field">
+    <%= form.label :is_admin %>
+    <%= form.check_box :is_admin %>
+  </div>
+  <%= hidden_field_tag(:password, @user.password) %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+  </div>
+  </div>
+  </div>

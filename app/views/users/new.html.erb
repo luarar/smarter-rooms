@@ -1,0 +1,33 @@
+
+
+<div class="container fullheight bee">
+
+  <div class="container d-flex h-100 align-items-center login-wrapper">
+    <div class="mx-auto text-center login">
+
+<h1 class="login-title" >Sign up</h1>
+<%= form_with model: @user, local: true do |f| %>
+<% if @user.errors.any? %>
+<p>The form contains <%= pluralize(@user.errors.count, "error") %></p>
+<ul>
+<% @user.errors.full_messages.each do |msg| %>
+<li><%= msg %></li>
+<% end %>
+</ul>
+<% end %>
+<%= f.label :name %>
+<%= f.text_field :name, class: 'form-control' %>
+<%= f.label :email %>
+<%= f.email_field :email, class: 'form-control' %>
+<%= f.label :birthdate %>
+<%= f.date_select :birthdate, :start_year => Date.current.year, :end_year => 1920, class: 'form-control space-bottom' %>
+<%= f.label :password %>
+<%= f.password_field :password, class: 'form-control' %>
+<%= f.password_field :password_digest, class: 'form-control'  %>
+<%= f.submit "Create my account", class: "btn btn-primary"  %>
+<% end %>
+
+    </div>  
+  </div>
+
+</div>

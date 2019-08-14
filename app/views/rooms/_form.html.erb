@@ -1,0 +1,65 @@
+<div class="container form-container">
+<div class="col-md-7">
+<div class="card form-card">
+<h2 class="title">New Room</h2>
+
+
+
+<%= form_with(model: room, local: true) do |form| %>
+  <% if room.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(room.errors.count, "error") %> prohibited this room from being saved:</h2>
+
+      <ul>
+      <% room.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :code %>
+    <%= form.text_field :code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :floor %>
+    <%= form.text_field :floor %>
+  </div>
+
+  <div class="field">
+    <%= form.label :capacity %>
+    <%= form.number_field :capacity %>
+  </div>
+
+  <div class="field">
+
+  <%= hidden_field_tag "room[good_ids][]", nil %>
+  <%= form.collection_check_boxes :good_ids, Good.all, :id, :name %>
+
+  </div>
+
+  <div class="field">
+    <%= form.label :building %>
+    <%= form.collection_select(:building_id, Building.all , :id, :name) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :is_active %>
+    <%= form.check_box :is_active %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+  </div>
+  </div>
+  </div>

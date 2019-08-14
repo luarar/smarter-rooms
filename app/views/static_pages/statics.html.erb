@@ -1,0 +1,77 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Statics</h1>
+    <p class="lead">Free rooms, percent of month occupation and other booking metrics</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-s-12 statics-table">
+      <p class="title">Reserved rooms but with no people in </p>
+      <table class="table table-dark"> 
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Code</th>
+          </tr>
+        </thead>
+
+      <tbody>
+        <% @booked_rooms = Room.booked %>
+          <%  @booked_rooms.each  do |b| %>
+            <% @api = Room.api(b.code) %>
+            <% if @api["is_occupied"] == false %>
+              <tr >
+                <td><%= b.name %></td>
+                <td><%= b.code %></td>
+              </tr>
+              <% end %>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-6 col-s-12 statics-table">
+      <p class="title">Occupied but with no reservation </p>
+      <table class="table table-dark"> 
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Code</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% @free_rooms = Room.free.all %>
+          <% @free_rooms.each do |f| %>
+          <% @api = Room.api(f.code) %>
+          <% if @api["is_occupied"] == true %>
+            <tr >
+              <td><%= f.name %></td>
+              <td><%= f.code %></td>
+            </tr>
+            <% end %>
+        <% end %>
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="container graphics-container">
+  <div class="row">
+    <div class="col-md-6 col-s-12">
+      <p class="title text-center">Top 5 users in the last 30 days</p>
+
+      <%= pie_chart @topfiveusers %>
+    </div>
+    <div class="col-md-6 col-s-12">
+      <p class="title text-center">Top 5 booked rooms in the last 30 days</p>
+
+      <%= pie_chart @topfiverooms %>
+    </div>
+  </div>
+</div>
+

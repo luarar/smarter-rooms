@@ -1,0 +1,45 @@
+<nav id="navbar" class="navbar fixed-top navbar-dark">
+
+  <div class="mr-auto">
+  <%= link_to root_path, class: 'navbar-brand' do %>
+    <%= image_tag("bee.svg", :class => 'bee-svg', :alt => "bee logo") %>
+  <% end %>
+  <%= link_to 'Smarter Rooms', root_path, class: 'navbar-brand'  %>
+    <%= link_to 'Rooms', rooms_path, class: 'navbar-brand small-brand first'  %>
+  <%= link_to 'My bookings', bookings_path, class: 'navbar-brand small-brand'  %>
+  <%= link_to 'Contact', contact_path, class: 'navbar-brand small-brand'  %>
+        <% if current_user.is_admin %>
+
+
+    <%= link_to 'Users', users_path, class: 'navbar-brand small-brand'  %>
+    <%= link_to 'Statics', statics_path, class: 'navbar-brand small-brand'  %>
+      <% end %>
+
+  </div>
+
+
+  <div class="search-input">
+  <%= form_tag(rooms_path, method: :get, id: 'search-rooms') do %>
+    <%= text_field_tag :search, params[:search], type: 'search', placeholder: 'search' %>
+    <%= submit_tag ("Search"), class: 'hidden' %>
+  <% end %>
+  </div>
+
+
+
+
+  <div class="py-2 d-none d-md-inline-block ui pointing dropdown link item ">
+  <div class="dropdown">
+  <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" >
+  <%=icon  'fa fas fa-user-circle', class: 'dropdown icon' %>
+  <% if logged_in? %>
+              <%=current_user.name%>
+            <% end %>
+  </button>
+
+  <div class="dropdown-menu dropdown-menu-right">
+  <%= link_to 'Logout', logout_path, method: :delete, class: 'dropdown-item' %>
+  </div>
+  </div>
+  </div>  
+  </nav>

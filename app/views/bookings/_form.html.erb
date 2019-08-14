@@ -1,0 +1,40 @@
+<div class="container form-container">
+<div class="col-md-7">
+<div class="card form-card">
+<h2 class="title">New Booking</h2>
+<%= form_with(model: booking, local: true) do |form| %>
+  <% if booking&.errors&.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
+
+      <ul>
+      <% booking.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+    <%= form.label :valid_from %>
+    <%= form.datetime_select :valid_from, :start_year => Date.current.year, :end_year => 1920, class: 'form-control space-bottom' %>
+  </div>
+  <div class="field">
+    <%= form.label :valid_to %>
+    <%= form.datetime_select :valid_to, :start_year => Date.current.year, :end_year => 1920, class: 'form-control space-bottom' %>
+  </div>
+
+    <div class="field">
+    <%= form.label :participants %>
+    <%= form.number_field :participants %>
+  </div>
+  <%= hidden_field_tag(:room_id, @room.id) %>
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+</div>
+</div>

@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<div class="jumbotron jumbotron-fluid 40-margin">
+  <div class="container">
+    <h1 class="display-4">Rooms</h1>
+    <p class="lead">Where do you want to book a meeting?</p>
+  </div>
+</div>
+
+<div class="container 40-bottom">
+<table class="table table-dark"> 
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Code</th>
+      <th scope="col">Floor</th>
+      <th scope="col">Capacity</th>
+      <th scope="col">Status</th>
+      <th scope="col" colspan="3"></th>
+      <th scope="col" colspan="3"></th>
+      
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rooms.each do |room| %>
+    <% @api = Room.api(room.code) %>
+      <tr>
+        <td><%= room.name %></td>
+        <td><%= room.code %></td>
+        <td><%= room.floor %></td>
+        <td><%= room.capacity %></td>
+        <td class="text-center">  
+        <% if @api['is_occupied'] === true %>
+        <%=icon  'fas fa-male', class: 'occupance' %>
+        <%= @api['estimated_occupants']%>
+        <% else %>
+        <p class="green">free</p>
+        <% end %>
+        </td>
+        <td><%= link_to 'Book', new_booking_path(room_id: room.id), class: "btn btn-sm btn-primary" %>
+        <td><%= link_to 'Show', room %></td>
+        <% if current_user.is_admin %>
+        <td><%= link_to 'Edit', edit_room_path(room) %></td>
+        <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+         <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+        
+<% if current_user.is_admin %>
+<%= link_to 'New Room', new_room_path %>
+<% end %>
+</div>
+

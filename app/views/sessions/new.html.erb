@@ -1,0 +1,26 @@
+
+
+<div class="container fullheight bee">
+
+  <div class="container d-flex h-100 align-items-center login-wrapper">
+    <div class="mx-auto text-center login">
+
+<h1 class="login-title">Log in</h1>
+
+<%= form_with scope: :session, url: login_path do |f| %>
+
+
+ <%= f.label :email %>
+ <%= f.email_field :email, class: 'form-control' %>
+
+ <%= f.label :password %>
+ <%= f.password_field :password, class: 'form-control' %>
+
+ <%= f.submit "Log in", class: "btn btn-light" %>
+<% end %>
+<p class="login-p" >New user? <%= link_to "Sign up now!", signup_path %></p>
+
+    </div>  
+  </div>
+
+</div>

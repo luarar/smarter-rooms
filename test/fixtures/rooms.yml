@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  code: MyString
+  floor: MyString
+  capacity: 1
+  accesories: 1
+
+two:
+  name: MyString
+  code: MyString
+  floor: MyString
+  capacity: 1
+  accesories: 1

@@ -1,0 +1,30 @@
+<div class="main-wrapper background-bee">
+
+  <div class="container no-margin-right more-width">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-1">
+        <div class="pill"></div>
+        <h1 class="maintitle">Smarter Rooms</h1>
+      </div>
+
+
+      <div class="col-md-4 login-container">
+      <div class="login-buttons">
+        <% if logged_in? %>
+
+          <%= link_to "Log out", logout_path, method: :delete, :class => "btn  btn-light"   %>
+        <% else %>
+        <%= link_to "Sign up now", signup_path, :class => "btn  btn-light"  %>
+          <%= link_to "Log in", login_path, :class => "btn  btn-light" %>
+        <% end %>
+        <%= link_to "contact", contact_path, :class => "btn  btn-light" %>
+      </div>
+    </div>
+    </div>  
+  </div>
+
+</div>
+
+
+
+
